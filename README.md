@@ -15,6 +15,17 @@ With this package, CakePHP services can be called using service facades, with st
 It is a simpler alternative to passing services as parameters in the constructors of other classes, or using lazy services.
 It will be especially interesting in the case when a class depends on many services, but calls some of them only occasionally.
 
+### Facades definition
+
+The base classes for service facade definitions are provided by the [lagdo/facades](https://github.com/lagdo/facades) package.
+
+A service facade based on this package can be use without any change with other frameworks, if a package for this framework is available, or a `PSR-11` container can be provided.
+
+The following packages are also available:
+- Symfony: https://github.com/lagdo/symfony-facades
+- Laravel (yes): https://github.com/lagdo/laravel-facades
+- CakePHP: https://github.com/lagdo/cake-facades
+
 ### Installation
 
 Install the package with `composer`.
@@ -147,7 +158,7 @@ class MyFacade extends AbstractFacade
 ```
 
 > [!IMPORTANT]
-> The `Lagdo\Facades\ServiceInstance` trait *must* be defined in the final service facade class, and not inherited by a service facade.
+> The `Lagdo\Facades\ServiceInstance` trait *must* be used in each service facade class, and not in a parent class. The same instance will be shared by all the classes inheriting the same base class using the trait, and the service facades will ot work as expected.
 
 The service container is called only once in this example code.
 
